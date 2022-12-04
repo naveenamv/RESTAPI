@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "cc0ba449-600a-415a-bc31-113e61f14f20",
+		"name": "JIRA PROJECT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24456875"
+	},
+	"item": [
+		{
+			"name": "create-an_issue_in_jira",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"Resp=pm.response.json();",
+							"id1=Resp.id;",
+							"pm.globals.set(\"jira_id\", id1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "navee.kannan@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAOKZPtfuVFBBlwzITvtC0AB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fields\": {\n    \"project\":\n                {\n                    \"key\": \"PROJ\"\n                },\n    \"summary\": \"create issue in RA project\",\n    \"description\": \"Creating of an issue using project keys and issue type names using the REST API\",\n    \"issuetype\": {\n                    \"name\": \"Bug\"\n                }\n    }\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://naveenamanikannanvj.atlassian.net/rest/api/2/issue/",
+					"protocol": "https",
+					"host": [
+						"naveenamanikannanvj",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Issue Based on the Issue ID or Key",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "navee.kannan@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAOKZPtfuVFBBlwzITvtC0AB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://naveenamanikannanvj.atlassian.net/rest/api/2/issue/{{jira_id}}",
+					"protocol": "https",
+					"host": [
+						"naveenamanikannanvj",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{jira_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit  an Issue in Jira",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "navee.kannan@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAOKZPtfuVFBBlwzITvtC0AB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fields\": {\n\n        \"description\": \"Bug creation Using REST API for testing\"\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://naveenamanikannanvj.atlassian.net/rest/api/2/issue/{{jira_id}}",
+					"protocol": "https",
+					"host": [
+						"naveenamanikannanvj",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{jira_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search for all issues",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "navee.kannan@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAOKZPtfuVFBBlwzITvtC0AB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://naveenamanikannanvj.atlassian.net/rest/api/2/search?jql=project={{projectName}}",
+					"protocol": "https",
+					"host": [
+						"naveenamanikannanvj",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"search"
+					],
+					"query": [
+						{
+							"key": "jql",
+							"value": "project={{projectName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all issue Types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"Resp1=pm.response.json();",
+							"id1=Resp1[0].id;",
+							"console.log(\"resp1\",Resp1[0].id);",
+							"pm.globals.set(\"issuetype_id\", id1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "navee.kannan@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAOKZPtfuVFBBlwzITvtC0AB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://naveenamanikannanvj.atlassian.net/rest/api/2/issuetype",
+					"protocol": "https",
+					"host": [
+						"naveenamanikannanvj",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issuetype"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List the specific issue type with the ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "navee.kannan@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAOKZPtfuVFBBlwzITvtC0AB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://naveenamanikannanvj.atlassian.net/rest/api/2/issuetype/{{issuetype_id}}",
+					"protocol": "https",
+					"host": [
+						"naveenamanikannanvj",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issuetype",
+						"{{issuetype_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Issue in Jira (Issue can be edited with Issue ID or Key)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "navee.kannan@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAOKZPtfuVFBBlwzITvtC0AB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://naveenamanikannanvj.atlassian.net/rest/api/2/issue/{{jira_id}}",
+					"protocol": "https",
+					"host": [
+						"naveenamanikannanvj",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{jira_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "projectName",
+			"value": "PROJECT1"
+		}
+	]
+}
